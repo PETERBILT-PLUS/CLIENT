@@ -176,7 +176,7 @@ function Header() {
             <nav className={`${state ? "mobile-navigation-active" : "mobile-navigation"} flex flex-col justify-start pt-14 gap-10 items-center lg:hidden`}>
 
                 <div className="p-2">
-                    <h1 className="text-2xl text-center cursor-pointer">LOGO</h1>
+                    <h1 className="text-2xl text-center cursor-pointer"><img className="w-24 h-24 py-0" src={LOGO} alt={"LOGO"} /></h1>
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
@@ -186,6 +186,29 @@ function Header() {
                 </div>
 
                 <div className="flex flex-col justify-evenly items-center">
+                    {adminState || authUser ? (
+                        <div className="relative">
+                            <details className="dropdown">
+                                <summary className="btn m-1 px-8">Plus</summary>
+                                <ul className="menu dropdown-content bg-base-100 rounded-box z-[1] w-52 p-2 shadow">
+                                    {adminState ? (
+                                        <>
+                                            <li><Link to="/admin/admin-orders">Ordres</Link></li>
+                                            <li><Link to="/admin/get-users">Utilisateurs</Link></li>
+                                            <li><Link to="/admin/get-products">produits</Link></li>
+                                            <li><Link to="/admin/create-listing">Ajouter un produit</Link></li>
+                                            <li><Link to="/admin/create-brand-and-category">Ajouter Brand et Produit</Link></li>
+                                        </>
+                                    ) : (
+                                        <>
+                                            <li><Link to="/panier">Panier</Link></li>
+                                            <li><Link to="/orders">Ordres</Link></li>
+                                        </>
+                                    )}
+                                </ul>
+                            </details>
+                        </div>
+                    ) : null}
                     <button type="button" className="sign-in-button my-2">Se connecter</button>
                     <button type="button" className="create-account my-2">Crée un compte</button>
                 </div>
